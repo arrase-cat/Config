@@ -4,7 +4,7 @@ endif
 
 lua << EOF
 --local on_attach = require'completion'.on_attach
-
+require'colorizer'.setup()
 local nvim_lsp = require('lspconfig')
 local protocol = require'vim.lsp.protocol'
 local coq = require "coq" -- add this

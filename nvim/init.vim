@@ -27,6 +27,9 @@ set expandtab
 "let loaded_matchparen = 1
 set shell=fish
 set backupskip=/tmp/*,/private/tmp/*
+set updatetime=300
+set timeoutlen=120
+
 
 " incremental substitution (neovim)
 if has('nvim')
@@ -48,15 +51,16 @@ set ignorecase
 set smarttab
 " indents
 filetype plugin indent on
-set shiftwidth=2
-set tabstop=2
+set shiftwidth=4
+set tabstop=4
 set ai "Auto indent
 set si "Smart indent
-set nowrap "No Wrap lines
+set wrap "No Wrap lines
 set backspace=start,eol,indent
 " Finding files - Search down into subfolders
 set path+=**
 set wildignore+=*/node_modules/*
+
 
 " Turn off paste mode when leaving insert
 autocmd InsertLeave * set nopaste

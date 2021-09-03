@@ -31,6 +31,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 "   Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
     Plug 'romgrk/barbar.nvim'
     Plug 'hoob3rt/lualine.nvim'
+    Plug 'norcalli/nvim-colorizer.lua'
+
+
 call plug#end()
 
 
