@@ -40,14 +40,14 @@ function __check_rvm --on-variable PWD --description 'Do nvm stuff'
   end
 end
 
-switch (uname)
-  case Darwin
+#switch (uname)
+#  case Darwin
     source (dirname (status --current-filename))/config-osx.fish
-  case Linux
+#  case Linux
     # Do nothing
-  case '*'
-    source (dirname (status --current-filename))/config-windows.fish
-end
+#  case '*'
+#    source (dirname (status --current-filename))/config-windows.fish
+#end
 
 set LOCAL_CONFIG (dirname (status --current-filename))/config-local.fish
 if test -f $LOCAL_CONFIG
@@ -55,3 +55,4 @@ if test -f $LOCAL_CONFIG
 end
 
 eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+
