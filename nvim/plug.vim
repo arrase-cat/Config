@@ -1,5 +1,10 @@
-call plug#begin('~/.config/nvim/autoload/plugged')
+if has("nvim ")
+    let g:plug_home = stdpath("data") . '/plugged'
+endif
 
+call plug#begin()
+
+if has("nvim")
         "Lua
 	Plug 'neovim/nvim-lspconfig'
 	Plug 'glepnir/lspsaga.nvim'
@@ -32,6 +37,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'romgrk/barbar.nvim'
     Plug 'hoob3rt/lualine.nvim'
     Plug 'norcalli/nvim-colorizer.lua'
+    Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+endif
 
 
 call plug#end()

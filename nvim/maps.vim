@@ -59,6 +59,9 @@ vnoremap <silent> # :<C-U>
 
 " Delete a word backwards
 nnoremap dw vb"_d
+nnoremap <backspace> diw
+nnoremap <A-y> yiw
+nnoremap <A-u> yiW
 
 "EMMET
 let g:user_emmet_mode='n'
