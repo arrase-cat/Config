@@ -3,13 +3,11 @@ if !exists('g:lspconfig')
 endif
 
 lua << EOF
---local on_attach = require'completion'.on_attach
 require'colorizer'.setup()
-local nvim_lsp = require('lspconfig')
-local protocol = require'vim.lsp.protocol'
-local coq = require "coq" -- add this
-vim.cmd('COQnow')
 
+local nvim_lsp = require('lspconfig')
+
+protocol = require'vim.lsp.protocol'
 -- Use an on_attach function to only map the following keys 
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -17,8 +15,8 @@ local on_attach = function(client, bufnr)
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
   -- Mappings.
-  local opts = { noremap=true, silent=true }
 
+  local opts = { noremap=true, silent=true }
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
@@ -37,7 +35,6 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<S-C-j>', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<space>m', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-
   -- formatting
   if client.resolved_capabilities.document_formatting then
     vim.api.nvim_command [[augroup Format]]
@@ -49,7 +46,83 @@ local on_attach = function(client, bufnr)
 
 end
 
-require'lspconfig'.cssls.setup{}
+ -- Setup nvim-cmp.
+  local cmp = require'cmp'
+
+  cmp.setup({
+    snippet = {
+      expand = function(args)
+        -- For `vsnip` user.
+        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` user.
+      end,
+    },
+    mapping = {
+      ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    },
+    sources = {
+      { name = 'nvim_lsp' },
+
+      -- For vsnip user.
+      { name = 'vsnip' },
+
+      { name = 'buffer' },
+    }
+  })
+
+
+
+local LSP_KIND_SIGNS = {
+   Text             = "",
+   Method           = "",
+   Function         = "",
+   Constructor      = "",
+   Field            = "ﰠ",
+   Variable         = "",
+   Class            = "",
+   Interface        = "ﰮ",
+   Module           = "",
+   Property         = "",
+   Unit             = "塞",
+   Value            = "",
+   Enum             = "練",
+   Keyword          = "",
+   Snippet          = " ",
+   Color            = "",
+   File             = "",
+   Reference        = "",
+   Folder           = "",
+   EnumMember       = " ",
+   Constant         = "ﲀ",
+   Struct           = " ",
+   Event            = "",
+   Operator         = "",
+   TypeParameter    = "",
+   }
+
+local lspkind = require('lspkind')
+cmp.setup {
+  formatting = {
+    format = function(entry, vim_item)
+      vim_item.kind = LSP_KIND_SIGNS[vim_item.kind]
+      return vim_item
+    end
+  }
+}
+
+
+require('lspconfig').cssls.setup {
+    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+    }
+
+require('lspconfig').clangd.setup {
+    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+    }
+
+require('lspconfig').html.setup {
+    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+    }
+
+
 
 nvim_lsp.flow.setup {
   on_attach = on_attach

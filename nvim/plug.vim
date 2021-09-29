@@ -9,12 +9,7 @@ if has("nvim")
 	Plug 'neovim/nvim-lspconfig'
 	Plug 'glepnir/lspsaga.nvim'
 	Plug 'onsails/lspkind-nvim'
-"	Plug 'kosayoda/nvim-lightbulb'
 
-	" main one
-	Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
-	" 9000+ Snippets
-	Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 	"Autocomplete
 	Plug 'mattn/emmet-vim'
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -38,6 +33,16 @@ if has("nvim")
     Plug 'hoob3rt/lualine.nvim'
     Plug 'norcalli/nvim-colorizer.lua'
     Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+
+    Plug 'hrsh7th/nvim-cmp'
+    Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'hrsh7th/cmp-nvim-lua'
+    Plug 'L3MON4D3/LuaSnip'
+
+
+    " For vsnip user.
+    Plug 'hrsh7th/cmp-vsnip'
+    Plug 'hrsh7th/vim-vsnip'
 endif
 
 

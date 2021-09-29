@@ -61,7 +61,6 @@ set backspace=start,eol,indent
 set path+=**
 set wildignore+=*/node_modules/*
 
-
 " Turn off paste mode when leaving insert
 autocmd InsertLeave * set nopaste
 
@@ -124,6 +123,7 @@ if has("unix")
 endif
 
 runtime ./maps.vim
+runtime ./kind.lua
 "}}}
 
 " Syntax theme "{{{
